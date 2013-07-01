@@ -1,0 +1,33 @@
+﻿<html>
+<head>
+<META HTTP-EQUIV=”Content-Type” content="text/html; charset=utf-8">
+<title> TEST </title>
+<link rel="stylesheet" href="jquery-ui.min.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui-1.10.3.custom.min.js"></script>
+<script language="JavaScript">
+function simple_tooltip(target_items, name){
+	$(target_items).each(function(i){
+		$("body").append("<div class='"+name+"' id='"+name+i+"' style='display:none'><p>"+$(this).attr('title')+"</p></div>");
+		var my_tooltip = $("#"+name+i);
+		$(this).removeAttr("title").mouseover(function(e){
+			my_tooltip.css({left:e.pageX-20, top:e.pageY+20});
+			my_tooltip.addClass("ui-tooltip ui-widget ui-corner-all ui-widget-content " + name);
+			my_tooltip.fadeIn(400);
+			setInterval(function (){my_tooltip.fadeOut(400);}, 2000);
+		}).mouseout(function(){
+			my_tooltip.fadeOut(400);})
+	});
+}
+
+$(document).ready(function(){
+	simple_tooltip("[title]", "tooltip"); //Это наш тултип
+	//$('#jq').tooltip(); // Это тултип Jquery
+});
+</script>
+</head>
+<body>
+<a href="#" title="Это наш тултип!">Сцылка</a>
+<div id="jq"  style="background-color:red;">Дивка</div>
+</body>
+</html>
